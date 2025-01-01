@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTMX example</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+</head>
+<body>
+    <h1>HTMX example</h1>
+
+    <h2>1. AJAX load</h2>
+    <button hx-get="/get-content" hx-target="#content">click me</button>
+    <div id="content"></div>
+
+    <h2>2. from submit</h2>
+    <form
+        hx-debug="true"
+        hx-post="/submit-form" 
+        hx-target="#form-result" 
+        hx-swap="outerHTML">
+        <input type="text" name="name" placeholder="inputName">
+        <input type="submit" value="summit">
+    </form>
+    <div id="form-result"></div>
+   
+
+    <h2>3. search</h2>
+    <input 
+        name="q" 
+        hx-get="/search" 
+        hx-target="#search-results" 
+        hx-trigger="keyup changed delay:500ms" 
+        placeholder="input search term">
+    <div id="search-results"></div>
+
+    <h2>4. delete</h2>
+    <div id="item-123">
+        project 123
+        <button hx-delete="/delete-item/123" hx-target="#item-123" hx-swap="outerHTML">Delete </button>
+    </div>
+
+    <h2>5. load more</h2>
+    <div id="items">
+        <div>input 1</div>
+        <div>input 2</div>
+    </div>
+    <button hx-get="/get-more-items?page=2" hx-target="#items" hx-swap="afterend">load more</button>
+</body>
+</html>
